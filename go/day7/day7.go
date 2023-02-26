@@ -68,14 +68,11 @@ func getDirectorySizes(thisDir *dir) (int, []int) {
 		dir, _ := getDirectorySizes(childDir)
 		return dir
 	})
-	immediateChildDirsTotalSize := lo.SumBy(immediateChildDirSizes, func(dirSize int) int {
-		return dirSize
-	})
 	childDirSizes := lo.FlatMap(thisDir.childDirs, func(childDir *dir, _ int) []int {
 		_, dirs := getDirectorySizes(childDir)
 		return dirs
 	})
-	return filesTotalSize + immediateChildDirsTotalSize, append(childDirSizes, immediateChildDirSizes...)
+	return filesTotalSize + lo.Sum(immediateChildDirSizes), append(childDirSizes, immediateChildDirSizes...)
 }
 
 func parseConsoleOutput(promptLines []string) *dir {
