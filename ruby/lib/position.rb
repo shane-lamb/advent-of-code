@@ -14,6 +14,8 @@ class Position
     [@x, @y].hash
   end
 
+  alias eql? ==
+
   def ==(other)
     @x == other.x && @y == other.y
   end

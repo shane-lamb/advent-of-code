@@ -25,7 +25,7 @@ def head_moves(direction)
     end
   end
 
-  $visited[$knots.last.to_s] = true
+  $visited[$knots.last] = true
 end
 
 file_path = File.join(__dir__, "../problems", "day9", "input.txt")
